@@ -9,8 +9,8 @@
   justify-content: center;
   border: 1px solid black;
   margin: 0 7.5px 15px;
-  
-  // overflow: hidden;
+  /* Here we preventing the card from overflowing */
+  overflow: hidden;
 
   &:hover {
     cursor: pointer;
