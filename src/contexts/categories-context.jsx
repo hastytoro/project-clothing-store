@@ -1,12 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 
 import {
-  addCollectionAndDocuments,
+  // addCollectionAndDocuments,
   getCollectionAndDocuments,
 } from "../utils/firebase";
 
-import productData from "../data/shop-data.json";
-import SHOP_DATA from "../data/shop-data";
+// import productData from "../data/shop-data.json";
+// import SHOP_DATA from "../data/shop-data";
 
 export const CategoriesContext = createContext({
   categoriesMap: {},
@@ -21,7 +21,6 @@ export const CategoriesProvider = ({ children }) => {
     const getCollectionMapping = async () => {
       const categoryMap = await getCollectionAndDocuments("categories");
       setCategoriesMap(categoryMap);
-      console.log(categoryMap);
     };
     getCollectionMapping();
   }, []);

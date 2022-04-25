@@ -10,37 +10,61 @@ import { CartContext } from "../../contexts/cart-context";
 
 import { signOutUser } from "../../utils/firebase";
 
-import "./navigation.scss";
+import styled from "styled-components";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
   return (
     <>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
+      <NavigationContainer>
+        <LogoContainer to="/">
           <Logo className="logo" />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
-            SHOP
-          </Link>
+        </LogoContainer>
+        <NavLinks>
+          <NavLink to="/shop">SHOP</NavLink>
           {currentUser ? (
-            <span className="nav-link" onClick={signOutUser}>
+            <NavLink as="span" onClick={signOutUser}>
               SIGN OUT
-            </span>
+            </NavLink>
           ) : (
-            <Link className="nav-link" to="/auth">
-              SIGN IN
-            </Link>
+            <NavLink to="/auth">SIGN IN</NavLink>
           )}
           <CartIcon />
-        </div>
+        </NavLinks>
         {isCartOpen && <CartDropDown />}
-      </div>
+      </NavigationContainer>
       <Outlet />
     </>
   );
 };
+
+const NavigationContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  height: 70px;
+  width: 100%;
+  margin-bottom: 25px;
+`;
+
+const LogoContainer = styled(Link)`
+  height: 100%;
+  width: 70px;
+  padding: 25px;
+`;
+
+const NavLinks = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 50%;
+  height: 100%;
+`;
+
+const NavLink = styled(Link)`
+  padding: 10px 15px;
+  cursor: pointer;
+`;
 
 export default Navigation;
